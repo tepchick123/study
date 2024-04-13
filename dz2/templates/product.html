@@ -1,0 +1,22 @@
+{% extends "components/index.html" %}
+
+{% block main %}
+{% load static %}
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="{{ product.image.url }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{ product.name }}</h1>
+        <p class="lead">${{ product.price }}</p>
+        {% if request.user.is_authenticated %}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <a href="{% url 'edit' pk=product.pk %}" class="btn btn-primary btn-lg px-4 me-md-2">Edit</a>
+          <a href="{% url 'delete' pk=product.pk %}" class="btn btn-outline-secondary btn-lg px-4">Delete</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+</div>
+{% endblock main %}

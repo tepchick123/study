@@ -1,0 +1,24 @@
+{% extends "components/index.html" %}
+
+{% block main %}
+{% load static %}
+<div class="container d-flex justify-content-center align-items-center">
+    <form class="d-flex flex-column align-items-center gap-3" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <img src="{% static 'src/logo.svg' %}" width="57" height="57">
+        <h1 class="h3 mb-3 fw-normal">Product</h1>
+        <div class="w-100 form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Name Product" name="name">
+            <label for="floatingInput">Name</label>
+          </div>
+        <div class="w-100 form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="00" name="price">
+            <label for="floatingInput">Price</label>
+        </div>
+        <div class="w-100">
+            <input class="form-control" type="file" id="formFile" accept="image/*" name="image">
+        </div>
+        <button class="btn btn-primary w-100 py-2" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock main %}

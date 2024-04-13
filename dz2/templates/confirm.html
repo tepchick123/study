@@ -1,0 +1,23 @@
+{% extends "components/index.html" %}
+
+{% block main %}
+{% load static %}
+<div class="modal modal-sheet position-static d-block p-4 py-md-5" tabindex="-1" role="dialog" id="modalTour">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-body p-5">
+          <h2 class="fw-bold mb-3">Delete?</h2>
+          <form method="post" action="{% url 'delete' pk=product.pk %}">
+            {% csrf_token %}
+            <button class="btn btn-outline-primary w-100 py-2" type="submit">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="container d-flex justify-content-center align-items-center">
+    <a href="{% url 'home' %}" class="text-decoration-none border-top">
+        <button type="button" class="btn btn-lg btn-primary mt-5" data-bs-dismiss="modal">Home</button>
+    </a>
+</div>
+{% endblock main %}

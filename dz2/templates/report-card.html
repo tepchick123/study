@@ -1,0 +1,19 @@
+{% extends "components/index.html" %}
+
+{% block main %}
+<div class="container py-5">
+    <div class="flex justify-content-center align-items-center g-5 py-5">
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{ report.email }} | {% if report.type == "1" %} Complaint {% else %} Suggestion {% endif %}</h1>
+        <p class="lead">{{ report.report }}</p>
+        <p class="lead">{{ report.date }}</p>
+        {% if request.user.is_authenticated %}
+        <form method="post" action="{% url 'report-delete' report.id %}" class="d-inline">
+        {% csrf_token %}
+            <button type="submit" class="btn btn-danger my-1">Delete</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+</div>
+{% endblock main %}

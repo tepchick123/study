@@ -1,0 +1,41 @@
+{% extends "components/index.html" %}
+
+{% block main %}
+{% load static %}
+<div class="container col-xxl-8 px-4 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-10 col-sm-8 col-lg-6">
+      <img src="{% static 'src/frame.svg' %}" class="d-block mx-lg-auto img-fluid" width="700" height="600" loading="lazy">
+    </div>
+    <div class="col-lg-6">
+      <h1 class="display-5 fw-bold lh-1 mb-3">Nike Store</h1>
+      <p class="lead mb-1">Extreme comfort. Hyper durable. Introducing the Air Max</p>
+      <p class="lead mb-3">- designed to push you past your limits and help you go to the max.</p>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a href="{% url 'products' %}">
+          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Buy Now</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container px-4 py-4 border-top" id="featured-3">
+  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3 d-flex align-items-center justify-content-center">
+    <div class="feature col d-flex flex-column align-items-center justify-content-center gap-3">
+      <img src="{% static 'src/collection.svg' %}" width="48" height="48">
+      <h3 class="fs-2 text-body-emphasis">Shopping As It Should Be</h3>
+      <p>30-day receiptless returns</p>
+    </div>
+    <div class="feature col d-flex flex-column align-items-center justify-content-center gap-3">
+      <img src="{% static 'src/toggles.svg' %}" width="48" height="48">
+      <h3 class="fs-2 text-body-emphasis">Nike Experiences</h3>
+      <p>Live events, workshops and workouts happening IRL</p>
+    </div>
+    <div class="feature col d-flex flex-column align-items-center justify-content-center gap-3">
+      <img src="{% static 'src/person-circle.svg' %}" width="48" height="48">
+      <h3 class="fs-2 text-body-emphasis">Workouts & Training Plans</h3>
+      <p>100+ workouts designed by Nike master trainers</p>
+    </div>
+  </div>
+</div>
+{% endblock main %}

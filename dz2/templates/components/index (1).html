@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nike</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="shortcut icon" type="image/svg" href="{% static 'src/logo.svg' %}" >
+</head>
+<body>
+    <header class="d-flex flex-wrap align-items-center justify-content-around py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <img src="{% static 'src/logo.svg' %}" width="40" height="32">
+      </a>
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="{% url 'home' %}" class="nav-link px-3 link-dark {% if request.path == '/' %} border-bottom border-top {% endif %}">Home</a></li>
+        <li><a href="{% url 'products' %}" class="nav-link px-3 link-dark {% if request.path == '/products' %} border-bottom border-top {% endif %}">Products</a></li>
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'reports' %}" class="nav-link px-3 link-dark {% if request.path == '/add' %} border-bottom border-top {% endif %}">Reports</a></li>
+        <li><a href="{% url 'report-add' %}" class="nav-link px-3 link-dark {% if request.path == '/add' %} border-bottom border-top {% endif %}">Create Report</a></li>
+        <li><a href="{% url 'add' %}" class="nav-link px-3 link-dark {% if request.path == '/add' %} border-bottom border-top {% endif %}">Create Product</a></li>
+        {% endif %}
+      </ul>
+      <div class="col-md-3 text-end">
+        {% if request.user.is_authenticated %}
+        <a href="#" class="text-decoration-none">
+          <button type="button" class="btn btn-outline-primary me-2">{{ request.user }}</button>
+        </a>
+        <a href="{% url 'log-out' %}" class="text-decoration-none">
+          <button type="button" class="btn btn-primary">Log out</button>
+        </a>
+        {% else %}
+        <a href="{% url 'sign-in' %}" class="text-decoration-none">
+          <button type="button" class="btn btn-outline-primary me-2">Login</button>
+        </a>
+        <a href="{% url 'sign-up' %}" class="text-decoration-none">
+          <button type="button" class="btn btn-primary">Sign-up</button>
+        </a>
+        {% endif %}
+      </div>
+    </header>
+    <main class="content">
+      {% block main %}{% endblock main %}
+    </main>
+    <footer class="d-flex flex-wrap justify-content-around align-items-center py-3 my-1 border-top mt-auto">
+      <div class="col-md-5 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+          <img src="{% static 'src/logo.svg' %}" width="30" height="24">
+        </a>
+        <span class="mb-3 mb-md-0 text-body-secondary">© 2023 Nike, Best Seller</span>
+      </div>
+      <ul class="nav col-md-5 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-body-secondary" href="#"><img src="{% static 'src/twitter.svg' %}" width="24" height="24"></a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#"><img src="{% static 'src/instagram.svg' %}" width="24" height="24"></a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#"><img src="{% static 'src/facebook.svg' %}" width="24" height="24"></a></li>
+      </ul>
+    </footer>
+    <script defer src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>
