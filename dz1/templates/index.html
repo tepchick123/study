@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="shortcut icon" type="image/svg" href="{{ url_for('static', path='src/fastapi.svg') }}" >
+</head>
+<body>
+    <div class="container d-flex justify-content-between align-items-start gap-5 my-3">
+        <table class="table table-hover table-sm w-50 shadow border">
+            <caption class="fs-4 text-center fw-bold mb-2" style="caption-side: top;">Weather</caption>
+            <tbody>
+              {% for i in weather %}
+              <tr>
+                <th class="py-2 px-2 fw-light">{{ i.date }}</th>
+                <td class="py-2 px-2 fw-semibold">{{ i.high_temp }} / {{ i.low_temp }}</td>
+                <th class="py-2 px-2">
+                    {% if "солнечно" in i.condition.lower() %}
+                    <img src="{{ url_for('static', path='src/sunny.svg') }}" width="32" height="32">
+                    {% elif "облачно" in i.condition.lower() %}
+                    <img src="{{ url_for('static', path='src/cloudy.svg') }}" width="32" height="32">
+                    {% elif "дождь" in i.condition.lower() %}
+                    <img src="{{ url_for('static', path='src/rainy.svg') }}" width="32" height="32">
+                    {% elif "снег" in i.condition.lower() %}
+                    <img src="{{ url_for('static', path='src/snowy.svg') }}" width="32" height="32">
+                    {% endif %}
+                </th>
+                <td class="py-2 px-2 fw-medium">{{ i.condition }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+        <div class="d-flex flex-column w-50">
+            <table class="table table-hover table-sm w-50 shadow border">
+                <caption class="fs-4 text-center fw-bold mb-2" style="caption-side: top;">Currency Rate</caption>
+                <tbody>
+                  {% for i in currency_rate %}
+                  <tr>
+                    <th class="py-2 px-2 fw-light">{{ i.currency }}</th>
+                    <td class="py-2 px-2 fw-semibold">{{ i.buy_price }}</td>
+                    <td class="py-2 px-2 fw-semibold">{{ i.sell_price }}</td>
+                  </tr>
+                  {% endfor %}
+                  <caption>
+                    <form action="/send" method="post">
+                      <button type="submit" class="btn btn-primary">Send Currency Rate</button>
+                    </form>
+                  </caption>
+                </tbody>
+            </table>
+            <table class="table table-hover table-sm w-50 shadow border">
+                <caption class="fs-4 text-center fw-bold mb-2" style="caption-side: top;">Currency Rate (API)</caption>
+                <tbody>
+                  {% for i in currency_rate_api %}
+                  {% set currency, price = i.items()|first %}
+                  <tr>
+                    <th class="py-2 px-2 fw-light">{{ currency}}</th>
+                    <td class="py-2 px-2 fw-semibold">{{ price }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
